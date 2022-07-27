@@ -75,7 +75,7 @@ namespace Business.Repositories.UserRepository
             return new SuccessResult(UserMessages.DeletedUser);
         }
 
-        [SecuredAspect()]
+       //[SecuredAspect()]
         [CacheAspect(60)]
         [PerformanceAspect(3)]
         public async Task<IDataResult<List<User>>> GetList()
