@@ -55,7 +55,7 @@ namespace Business.Repositories.ProductRepository
             return new SuccessResult(ProductMessages.Deleted);
         }
 
-        [SecuredAspect("admin,product.getlist")]
+       // [SecuredAspect("admin,product.getlist")]
         [CacheAspect()]
         [PerformanceAspect()]
         public async Task<IDataResult<List<Product>>> GetList()

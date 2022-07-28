@@ -55,7 +55,7 @@ namespace Business.Repositories.PriceListDetailRepository
             return new SuccessResult(PriceListDetailMessages.Deleted);
         }
 
-        [SecuredAspect()]
+       // [SecuredAspect()]
         [CacheAspect()]
         [PerformanceAspect()]
         public async Task<IDataResult<List<PriceListDetail>>> GetList()
