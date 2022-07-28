@@ -26,7 +26,7 @@ namespace Business.Repositories.PriceListDetailRepository
             _priceListDetailDal = priceListDetailDal;
         }
 
-        [SecuredAspect()]
+        //[SecuredAspect()]
         [ValidationAspect(typeof(PriceListDetailValidator))]
         [RemoveCacheAspect("IPriceListDetailService.Get")]
 

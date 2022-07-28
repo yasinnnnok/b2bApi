@@ -8,9 +8,9 @@ namespace DataAccess.Context.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //MSİ - EV
-            optionsBuilder.UseSqlServer("Server=DESKTOP-4V1JSR7\\SQLEXPRESS;Database=B2BDb;Integrated Security=true;");
+           // optionsBuilder.UseSqlServer("Server=DESKTOP-4V1JSR7\\SQLEXPRESS;Database=B2BDb;Integrated Security=true;");
             //MONSTER //base yapı 
-            //optionsBuilder.UseSqlServer("Server=DESKTOP-BVJGQT1\\SQLEXPRESS;Database=B2BDb;Integrated Security=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-BVJGQT1\\SQLEXPRESS;Database=B2BDb;Integrated Security=true;");
         }
 
         public DbSet<User> Users { get; set; }

@@ -14,6 +14,8 @@ using Business.Repositories.CustomerRepository.Constants;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete;
 using DataAccess.Repositories.CustomerRepository;
+using Entities.Dtos;
+using Core.Utilities.Hashing;
 
 namespace Business.Repositories.CustomerRepository
 {
@@ -26,12 +28,23 @@ namespace Business.Repositories.CustomerRepository
             _customerDal = customerDal;
         }
 
-        [SecuredAspect()]
+        //[SecuredAspect()]
         [ValidationAspect(typeof(CustomerValidator))]
         [RemoveCacheAspect("ICustomerService.Get")]
 
-        public async Task<IResult> Add(Customer customer)
+        public async Task<IResult> Add(CustomerRegisterDto customerRegisterDto)
         {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePassword(customerRegisterDto.Password, out passwordHash, out passwordSalt);
+
+            Customer customer = new Customer()
+            {
+                Id = 0,
+                Email = customerRegisterDto.Email,
+                Name = customerRegisterDto.Name,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
             await _customerDal.Add(customer);
             return new SuccessResult(CustomerMessages.Added);
         }
@@ -67,6 +80,12 @@ namespace Business.Repositories.CustomerRepository
         public async Task<IDataResult<Customer>> GetById(int id)
         {
             return new SuccessDataResult<Customer>(await _customerDal.Get(p => p.Id == id));
+        }
+
+        public async Task<Customer> GetByEmail(string email)
+        {
+            var result = await _customerDal.Get(p => p.Email == email);
+            return result;
         }
 
     }

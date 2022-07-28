@@ -26,7 +26,7 @@ namespace Business.Repositories.CustomerRelationshipRepository
             _customerRelationshipDal = customerRelationshipDal;
         }
 
-        [SecuredAspect()]
+        //[SecuredAspect()]
         [ValidationAspect(typeof(CustomerRelationshipValidator))]
         [RemoveCacheAspect("ICustomerRelationshipService.Get")]
 
