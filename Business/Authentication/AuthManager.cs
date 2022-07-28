@@ -19,12 +19,13 @@ namespace Business.Authentication
         private readonly IUserService _userService;
         private readonly ITokenHandler _tokenHandler;
         private readonly ICustomerService _customerService;
-      
 
-        public AuthManager(IUserService userService, ITokenHandler tokenHandler)
+
+        public AuthManager(IUserService userService, ITokenHandler tokenHandler, ICustomerService customerService)
         {
             _userService = userService;
             _tokenHandler = tokenHandler;
+            _customerService = customerService;
         }
 
         public async Task<IDataResult<Token>> UserLogin(LoginAuthDto loginDto)
@@ -51,7 +52,7 @@ namespace Business.Authentication
                 return new ErrorDataResult<Token>("Kullanıcı maili sistemde bulunamadı!");
 
             var result = HashingHelper.VerifyPasswordHash(customerLoginDto.Password, customer.PasswordHash, customer.PasswordSalt);
-            List<OperationClaim> operationClaims = await _userService.GetUserOperationClaims(customer.Id);
+         
             if (result)
             {
                 Token token = new Token();

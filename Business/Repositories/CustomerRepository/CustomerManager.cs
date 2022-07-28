@@ -68,7 +68,7 @@ namespace Business.Repositories.CustomerRepository
             return new SuccessResult(CustomerMessages.Deleted);
         }
 
-        [SecuredAspect()]
+       // [SecuredAspect()]
         [CacheAspect()]
         [PerformanceAspect()]
         public async Task<IDataResult<List<Customer>>> GetList()

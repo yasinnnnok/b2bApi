@@ -62,6 +62,7 @@ namespace Core.Utilities.Security.JWT
         private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
             var claims = new List<Claim>();
+            claims.AddId(user.Id.ToString());
             claims.AddName(user.Name);
             claims.AddRoles(operationClaims.Select(p => p.Name).ToArray());
             return claims;
