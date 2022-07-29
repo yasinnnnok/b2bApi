@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.Concrete;
 using Core.Utilities.Result.Abstract;
+using Entities.Dtos;
 
 namespace Business.Repositories.ProductRepository
 {
@@ -14,6 +15,7 @@ namespace Business.Repositories.ProductRepository
         Task<IResult> Update(Product product);
         Task<IResult> Delete(Product product);
         Task<IDataResult<List<Product>>> GetList();
+        Task<IDataResult<List<ProductListDto>>> GetProductList(int customerId);
         Task<IDataResult<Product>> GetById(int id);
     }
 }

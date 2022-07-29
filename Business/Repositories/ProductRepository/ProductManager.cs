@@ -14,6 +14,7 @@ using Business.Repositories.ProductRepository.Constants;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete;
 using DataAccess.Repositories.ProductRepository;
+using Entities.Dtos;
 
 namespace Business.Repositories.ProductRepository
 {
@@ -61,6 +62,15 @@ namespace Business.Repositories.ProductRepository
         public async Task<IDataResult<List<Product>>> GetList()
         {
             return new SuccessDataResult<List<Product>>(await _productDal.GetAll());
+        }
+
+
+        // [SecuredAspect("admin,product.getlist")]
+        [CacheAspect()]
+        [PerformanceAspect()]
+        public async Task<IDataResult<List<ProductListDto>>> GetProductList(int customerId)
+        {
+            return new SuccessDataResult<List<ProductListDto>>(await _productDal.GetProductList(customerId));
         }
 
         [SecuredAspect("admin,product.get")]
